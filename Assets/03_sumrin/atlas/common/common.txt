@@ -1,0 +1,20 @@
+{"frames": {
+
+"circle_256.gif":
+{
+	"frame": {"x":2,"y":2,"w":258,"h":258},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":258,"h":258},
+	"sourceSize": {"w":258,"h":258}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "common.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":1024},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:df230285cd19cbcb66190f9bfda81170:fa057482ab2ea0203d5e210796dd2fba:54bade68f2ed4e1d2edb6461ffd14d6b$"
+}
+}
