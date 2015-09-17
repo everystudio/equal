@@ -20,7 +20,26 @@ public class DotManager : ButtonManager {
 	public void Initialize( int _iDotNum , int [] _iintialDot ){
 		for (int i = 0; i < _iDotNum; i++) {
 			m_DotList[i].SetNumber (_iintialDot [i]);
+			m_DotList [i].SetDotColor (DefineProject.DOT_COLOR.WHITE);
 		}
+	}
+
+
+	public void Initialize( CsvLevelData _data ){
+		const int iNum = 9;
+		Initialize( iNum ,
+			new int [iNum] {
+				_data.number1,
+				_data.number2,
+				_data.number3,
+				_data.number4,
+				_data.number5,
+				_data.number6,
+				_data.number7,
+				_data.number8,
+				_data.number9}
+		);
+
 	}
 
 	public bool IsClear( ref int _iNumber , int [] _iCheckCount ){

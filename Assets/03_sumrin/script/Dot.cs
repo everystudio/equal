@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Dot : ButtonBase {
 
-	private int m_iNumber;
+	public int m_iNumber;
 	public int Number{
 		get{ return m_iNumber; }
 	}

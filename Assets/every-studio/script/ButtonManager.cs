@@ -34,7 +34,9 @@ public class ButtonManager : ButtonBase {
 		this.Index = 0;
 		for( int i = 0 ; i < m_csButtonList.Length ; i++ ){
 			//Debug.Log ("count=" + i);
-			m_csButtonList[i].ButtonInit(i);
+			if (m_csButtonList [i] != null) {
+				m_csButtonList [i].ButtonInit (i);
+			}
 		}
 
 		TriggerClearAll();
@@ -44,7 +46,9 @@ public class ButtonManager : ButtonBase {
 	virtual public void TriggerClearAll(){
 		TriggerClear ();
 		for( int i = 0 ; i < m_csButtonList.Length ; i++ ){
-			m_csButtonList[i].TriggerClear();
+			if (m_csButtonList [i]) {
+				m_csButtonList [i].TriggerClear ();
+			}
 		}
 		return;
 	}
@@ -52,9 +56,11 @@ public class ButtonManager : ButtonBase {
 	public bool ButtonPushed {
 		get {
 			for( int i = 0 ; i < m_csButtonList.Length ; i++ ){
-				if( m_csButtonList[i].ButtonPushed ){
-					m_bButtonClicked = true;
-					m_intIndex = m_csButtonList[i].Index;
+				if (m_csButtonList [i] != null) {
+					if (m_csButtonList [i].ButtonPushed) {
+						m_bButtonClicked = true;
+						m_intIndex = m_csButtonList [i].Index;
+					}
 				}
 			}
 			return m_bButtonClicked;

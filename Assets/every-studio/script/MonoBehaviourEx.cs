@@ -18,6 +18,12 @@ public class MonoBehaviourEx : MonoBehaviour {
 		return;
 	}
 
+	protected bool m_bEndTween;
+	protected void EndTween(){
+		m_bEndTween = true;
+		return;
+	}
+
 	// ここはUGUIを使う場合あ#ifをうまいことしてください
 	#if UNITY_4
 	#else
@@ -40,6 +46,7 @@ public class MonoBehaviourEx : MonoBehaviour {
 	}
 
 	public void SetAlphaAll( GameObject _goRoot , float _fAlpha ){
+		m_bEndTween = false;
 		if (_goRoot) {
 			UILabel[] label_children = _goRoot.GetComponentsInChildren<UILabel>();
 			foreach (UILabel child in label_children) {
@@ -54,6 +61,7 @@ public class MonoBehaviourEx : MonoBehaviour {
 	}
 
 	public TweenAlpha TweenAlphaAll( GameObject _goRoot , float _fTime , float _fAlpha ){
+		m_bEndTween = false;
 		TweenAlpha tw = null;
 		if (_goRoot) {
 			UILabel[] label_children = _goRoot.GetComponentsInChildren<UILabel>();
@@ -69,6 +77,7 @@ public class MonoBehaviourEx : MonoBehaviour {
 	}
 
 	public TweenColor TweenColorAll( GameObject _goRoot , float _fTime , Color _color ){
+		m_bEndTween = false;
 		TweenColor tc = null;
 		if (_goRoot) {
 			UILabel[] label_children = _goRoot.GetComponentsInChildren<UILabel>();
