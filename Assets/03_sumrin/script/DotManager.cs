@@ -102,7 +102,7 @@ public class DotManager : ButtonManager {
 				}
 			}
 		}
-
+		_iNumber = iMasterNumber;
 		return bRet;
 
 

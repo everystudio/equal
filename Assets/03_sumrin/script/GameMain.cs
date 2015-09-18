@@ -196,6 +196,7 @@ public class GameMain : MonoBehaviourEx {
 				TweenAlphaAll (m_ClearDialog.gameObject, 0.5f, 1.0f);
 				m_ClearDialog.Initialize (DataManager.Instance.m_iPlayLevel , m_iClearScore );
 
+				m_btnBack.TriggerClear ();
 				ShowAd (false);
 
 			}
@@ -204,6 +205,10 @@ public class GameMain : MonoBehaviourEx {
 				m_eStep = STEP.NEXT;
 				TweenAlphaAll (m_ClearDialog.gameObject, 0.5f, 0.0f);
 			}
+
+			if (m_btnBack.ButtonPushed) {
+				m_eStep = STEP.BACK_SELECT;
+			} 
 			break;
 		case STEP.NEXT:
 			if (bInit) {

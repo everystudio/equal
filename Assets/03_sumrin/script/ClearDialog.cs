@@ -56,7 +56,7 @@ public class ClearDialog : MonoBehaviour {
 		#if UNITY_ANDROID
 		Debug.Log (Application.persistentDataPath);
 		SocialConnector.Share(
-			string.Format( "Level{0}を{1}い〜くあるでクリア！ {1}" , m_iLevel , m_iScore, DefineProject.TWEET_MESSAGE_CLEAR )
+			string.Format( "Level{0}を{1}い〜くあるでクリア！ {2}" , m_iLevel , m_iScore, DefineProject.TWEET_MESSAGE_CLEAR )
 		);
 		#elif UNITY_IPHONE
 		SocialConnector.Share(
