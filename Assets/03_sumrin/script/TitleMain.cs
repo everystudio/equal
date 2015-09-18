@@ -2,7 +2,7 @@
 using System.Collections;
 using NendUnityPlugin.AD;
 
-public class TitleMain : MonoBehaviour {
+public class TitleMain : MonoBehaviourEx {
 
 	[SerializeField]
 	private TapStart m_TapStart;
@@ -10,6 +10,8 @@ public class TitleMain : MonoBehaviour {
 	private TapStart m_StageSelect;
 	[SerializeField]
 	private TapStart m_ScoreAttack;
+	[SerializeField]
+	private ReviewDialog m_ReviewDialog;
 
 	[SerializeField]
 	private NendAdIcon m_NendAdIcon;
@@ -22,6 +24,8 @@ public class TitleMain : MonoBehaviour {
 		DELAY			,
 		GAME_START		,
 
+		REVIEW			,
+		REVIEW_THANKYOU	,
 		MODE_SELECT		,
 
 		DELAY_STAGE_SELECT	,
@@ -65,7 +69,27 @@ public class TitleMain : MonoBehaviour {
 		m_ScoreAttack.gameObject.SetActive (false);
 
 		DataManager.Instance.m_iPlayLevel = 0;
+		string strReviewCount = "review_count";
+		string strReview = "review";
 
+
+		int iCheckCount = 4;
+		if (PlayerPrefs.HasKey (strReview) == false) {
+			PlayerPrefs.SetInt (strReview, 0); 
+		}
+		if (0 == PlayerPrefs.GetInt (strReview)) {
+			if (PlayerPrefs.HasKey (strReviewCount) == false) {
+				PlayerPrefs.SetInt (strReviewCount, 1);
+			} else {
+				int iReviewCount = PlayerPrefs.GetInt (strReviewCount);
+				iReviewCount += 1;
+				if (iCheckCount < iReviewCount) {
+					m_eStep = STEP.REVIEW;
+					iReviewCount = 0;
+				}
+				PlayerPrefs.SetInt (strReviewCount, iReviewCount);
+			}
+		}
 	}
 	
 	// Update is called once per frame
@@ -77,6 +101,19 @@ public class TitleMain : MonoBehaviour {
 		}
 
 		switch (m_eStep) {
+
+		case STEP.REVIEW:
+			if (bInit) {
+				m_ReviewDialog.gameObject.SetActive (true);
+				m_ReviewDialog.Initialize ();
+				TweenAlphaAll (m_ReviewDialog.gameObject, 0.0f, 0.0f);
+				TweenAlphaAll (m_ReviewDialog.gameObject, 0.5f, 1.0f);
+			}
+			if (m_ReviewDialog.IsEnd ()) {
+				m_eStep = STEP.IDLE;
+			}
+			break;
+
 		case STEP.IDLE:
 			if (bInit) {
 				m_TapStart.TriggerClear ();
