@@ -16,6 +16,8 @@ public class DefineProject : Define {
 	public static readonly string NEND_AD_INTER_API_KEY = "9c88701a441d43893c5eac2ba485b56804c0f61c";
 	public static readonly string NEND_AD_INTER_SPOT_ID = "443851";
 	#elif UNITY_IPHONE
+	public static readonly string NEND_AD_INTER_API_KEY = "321f03d70fb7e3455da1ac687be72d49354b2972";
+	public static readonly string NEND_AD_INTER_SPOT_ID = "447212";
 	#endif
 
 	public static readonly string KEYNAME_STAGE = "stage";

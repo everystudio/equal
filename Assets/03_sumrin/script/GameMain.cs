@@ -10,8 +10,11 @@ public class GameMain : MonoBehaviourEx {
 
 	[SerializeField]
 	private NendAdBanner m_NendAdBanner;
+	#if UNITY_ANDROID
 	[SerializeField]
 	private NendAdIcon m_NendAdIcon;
+	#endif
+
 	//[SerializeField]
 	//private NendAdInterstitial m_NendAdInterstitial;
 
@@ -68,14 +71,17 @@ public class GameMain : MonoBehaviourEx {
 		if (_bFlag) {
 			m_NendAdBanner.Show ();
 			m_NendAdBanner.Resume ();
+			#if UNITY_ANDROID
 			m_NendAdIcon.Show ();
 			m_NendAdIcon.Resume ();
-
+			#endif
 		} else {
 			m_NendAdBanner.Hide ();
 			m_NendAdBanner.Pause ();
+			#if UNITY_ANDROID
 			m_NendAdIcon.Hide ();
 			m_NendAdIcon.Pause ();
+			#endif
 		}
 	}
 

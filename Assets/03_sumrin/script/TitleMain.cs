@@ -12,10 +12,10 @@ public class TitleMain : MonoBehaviourEx {
 	private TapStart m_ScoreAttack;
 	[SerializeField]
 	private ReviewDialog m_ReviewDialog;
-
+	#if UNITY_ANDROID
 	[SerializeField]
 	private NendAdIcon m_NendAdIcon;
-
+	#endif
 
 	private float m_fTimer;
 
@@ -40,6 +40,7 @@ public class TitleMain : MonoBehaviourEx {
 	public STEP m_eStepPre;
 
 	void ShowAd(bool _bFlag){
+		#if UNITY_ANDROID
 		if (_bFlag) {
 			m_NendAdIcon.Show ();
 			m_NendAdIcon.Resume ();
@@ -48,6 +49,7 @@ public class TitleMain : MonoBehaviourEx {
 			m_NendAdIcon.Hide ();
 			m_NendAdIcon.Pause ();
 		}
+		#endif
 	}
 
 	void OnEnable(){

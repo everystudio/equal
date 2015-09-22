@@ -9,7 +9,7 @@ public class BuildPostProcessor
 	public static void OnPostProcessBuild(BuildTarget target, string xcodeProjectPath)
 	{
 		if(target != BuildTarget.iOS) return;
-		AddUrlScheme(xcodeProjectPath, "jp.app.myzoo");
+		AddUrlScheme(xcodeProjectPath, "jp.everystudio.equal");
 	}
 
 	private static void AddUrlScheme(string xcodeProjectPath, string scheme)
