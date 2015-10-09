@@ -126,11 +126,14 @@ public class DataManager : MonoBehaviour
 
 	private void initialize(){
 		DontDestroyOnLoad (this);			// 削除させない
-
+		Debug.Log ("load m_masterTableAudio");
 		m_masterTableAudio.Load ();
+		Debug.Log ("load m_masterTablePrefab");
 		m_masterTablePrefab.Load ();
+		Debug.Log ("load m_masterTableSprite");
 		m_masterTableSprite.Load ();
 
+		Debug.Log ("load m_csvLevel");
 		m_csvLevel.Load ();
 
 		m_bLoadedStageStatus = false;

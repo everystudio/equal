@@ -3,7 +3,6 @@ using System.Collections;
 using NendUnityPlugin.AD;
 
 public class TitleMain : MonoBehaviourEx {
-
 	[SerializeField]
 	private TapStart m_TapStart;
 	[SerializeField]
@@ -53,7 +52,7 @@ public class TitleMain : MonoBehaviourEx {
 	}
 
 	void OnEnable(){
-		ShowAd (true);
+		//ShowAd (true);
 	}
 
 	void OnDisable(){
@@ -100,6 +99,7 @@ public class TitleMain : MonoBehaviourEx {
 		if (m_eStepPre != m_eStep) {
 			m_eStepPre  = m_eStep;
 			bInit = true;
+			Debug.Log ( string.Format( "Title Status({0})",m_eStep ));
 		}
 
 		switch (m_eStep) {
