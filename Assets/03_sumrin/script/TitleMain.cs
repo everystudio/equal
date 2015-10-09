@@ -42,12 +42,16 @@ public class TitleMain : MonoBehaviourEx {
 	void ShowAd(bool _bFlag){
 		#if UNITY_ANDROID
 		if (_bFlag) {
-			m_NendAdIcon.Show ();
-			m_NendAdIcon.Resume ();
+			if( m_NendAdIcon != null ){
+				m_NendAdIcon.Show ();
+				m_NendAdIcon.Resume ();
+			}
 
 		} else {
-			m_NendAdIcon.Hide ();
-			m_NendAdIcon.Pause ();
+			if( m_NendAdIcon != null ){
+				m_NendAdIcon.Hide ();
+				m_NendAdIcon.Pause ();
+			}
 		}
 		#endif
 	}

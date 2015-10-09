@@ -72,15 +72,19 @@ public class GameMain : MonoBehaviourEx {
 			m_NendAdBanner.Show ();
 			m_NendAdBanner.Resume ();
 			#if UNITY_ANDROID
-			m_NendAdIcon.Show ();
-			m_NendAdIcon.Resume ();
+			if( m_NendAdIcon != null ){
+				m_NendAdIcon.Show ();
+				m_NendAdIcon.Resume ();
+			}
 			#endif
 		} else {
 			m_NendAdBanner.Hide ();
 			m_NendAdBanner.Pause ();
 			#if UNITY_ANDROID
-			m_NendAdIcon.Hide ();
-			m_NendAdIcon.Pause ();
+			if( m_NendAdIcon != null ){
+				m_NendAdIcon.Hide ();
+				m_NendAdIcon.Pause ();
+			}
 			#endif
 		}
 	}
