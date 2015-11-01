@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using NendUnityPlugin.AD;
+using Soomla;
+using Soomla.Store;
 
 public class TitleMain : MonoBehaviourEx {
 
@@ -146,6 +149,8 @@ public class TitleMain : MonoBehaviourEx {
 
 				m_StageSelect.TriggerClear ();
 				m_ScoreAttack.TriggerClear ();
+
+				StoreManager.Instance.Initialize ();
 			}
 			if (m_StageSelect.ButtonPushed) {
 				m_eStep = STEP.DELAY_STAGE_SELECT;
@@ -186,6 +191,9 @@ public class TitleMain : MonoBehaviourEx {
 			break;
 		case STEP.SCORE_ATTACK:
 			if (bInit) {
+
+				AndroidInAppPurchaseManager.instance.purchase ("comicticket100");
+
 				//Application.LoadLevelAsync ("score_attack");
 				m_ScoreAttack.gameObject.GetComponent<UILabel> ().text = "準備中です";
 				m_ScoreAttack.Show ();
