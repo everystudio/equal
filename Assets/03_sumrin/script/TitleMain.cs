@@ -2,6 +2,8 @@
 using System.Collections;
 using NendUnityPlugin.AD;
 
+using Prime31;
+
 public class TitleMain : MonoBehaviourEx {
 
 	[SerializeField]
@@ -78,6 +80,8 @@ public class TitleMain : MonoBehaviourEx {
 		string strReviewCount = "review_count";
 		string strReview = "review";
 
+		StoreManager.Instance.DummyCall ();
+
 
 		int iCheckCount = 4;
 		if (PlayerPrefs.HasKey (strReview) == false) {
@@ -96,6 +100,7 @@ public class TitleMain : MonoBehaviourEx {
 				PlayerPrefs.SetInt (strReviewCount, iReviewCount);
 			}
 		}
+		Debug.Log ("Initialized");
 	}
 	
 	// Update is called once per frame
@@ -191,7 +196,16 @@ public class TitleMain : MonoBehaviourEx {
 				m_ScoreAttack.Show ();
 				m_ScoreAttack.enabled = false;
 
+				if (m_bChange == true) {
+					GoogleIAB.purchaseProduct ("comicticket100");
+				} else {
+					GoogleIAB.purchaseProduct ("equal.month.item001");
+				}
+				m_bChange = !m_bChange;
 			}
+
+
+
 			m_eStep = STEP.MODE_SELECT;
 			break;
 
@@ -200,6 +214,7 @@ public class TitleMain : MonoBehaviourEx {
 
 		}
 	}
+	public bool m_bChange;
 }
 
 
