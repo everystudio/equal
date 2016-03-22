@@ -45,6 +45,7 @@
 @property (nonatomic) NSInteger topMargin;
 @property (nonatomic) NSInteger rightMargin;
 @property (nonatomic) NSInteger bottomMargin;
+@property (nonatomic, strong) UIColor *backgroundColor;
 
 + (instancetype)paramWithString:(NSString*)paramString;
 - (void)updateLayoutWithString:(NSString*)paramString;
@@ -66,9 +67,10 @@
 
 @interface NendAdBanner : NSObject
 
-@property (nonatomic, retain) NADView* bannerView;
-@property (nonatomic, retain) BannerParams* params;
-@property (nonatomic, retain) NendRotationHandler* rotationHandler;
+@property (nonatomic, strong) NADView* bannerView;
+@property (nonatomic, strong) NADViewEventDispatcher *dispatcher;
+@property (nonatomic, strong) BannerParams* params;
+@property (nonatomic, strong) NendRotationHandler* rotationHandler;
 
 + (instancetype)bannerAdWithParams:(BannerParams*)params;
 

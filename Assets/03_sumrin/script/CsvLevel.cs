@@ -1,22 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CsvLevel : CsvBase<CsvLevelData> 
-{
-	//private static readonly string FilePath = "CSV/master_animal";
-	/*
-	public void Load( int _iLevel ) {
-		string filename = string.Format ("level_{0:D3}", _iLevel);
-		Load( "csv/" + filename );
-	}
-	*/
-	public void Load(){
-		Load ("csv/level");
-	}
-}
-
-
-public class CsvLevelData : MasterBase
+public class CsvLevelData : CsvDataParam
 {
 	public int level { get; private set; }
 	public int number1 { get; private set; }
@@ -43,6 +28,23 @@ public class CsvLevelData : MasterBase
 	}
 
 }
+
+
+
+public class CsvLevel : CsvData<CsvLevelData> 
+{
+	//private static readonly string FilePath = "CSV/master_animal";
+	/*
+	public void Load( int _iLevel ) {
+		string filename = string.Format ("level_{0:D3}", _iLevel);
+		Load( "csv/" + filename );
+	}
+	*/
+	public void Load(){
+		LoadResources("csv/level");
+	}
+}
+
 
 
 

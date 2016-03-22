@@ -129,16 +129,16 @@ public class GameMain : MonoBehaviourEx {
 				m_UnderNumberRed.Initialize (m_DotManager.GetNumber (DefineProject.DOT_COLOR.RED));
 				m_UnderNumberBlue.Initialize (m_DotManager.GetNumber (DefineProject.DOT_COLOR.BLUE));
 
-				if (DataManager.Instance.m_iPlayLevel == 0) {
-					DataManager.Instance.m_iPlayLevel = 1;
+				if (DataManagerEqual.Instance.m_iPlayLevel == 0) {
+					DataManagerEqual.Instance.m_iPlayLevel = 1;
 				}
-				CsvLevelData level_data = DataManager.Instance.GetLevelData (DataManager.Instance.m_iPlayLevel);
+				CsvLevelData level_data = DataManagerEqual.Instance.GetLevelData (DataManagerEqual.Instance.m_iPlayLevel);
 				m_DotManager.Initialize (level_data);
 
 				m_UnderNumberRed.SetNumber (m_DotManager.GetNumber (DefineProject.DOT_COLOR.RED));
 				m_UnderNumberBlue.SetNumber (m_DotManager.GetNumber (DefineProject.DOT_COLOR.BLUE));
 
-				m_lbHeaderLevel.text = string.Format ("Level {0}", DataManager.Instance.m_iPlayLevel);
+				m_lbHeaderLevel.text = string.Format ("Level {0}", DataManagerEqual.Instance.m_iPlayLevel);
 			}
 			m_fTimer += Time.deltaTime;
 			if (0.5f < m_fTimer) {
@@ -196,15 +196,15 @@ public class GameMain : MonoBehaviourEx {
 				// サーバー側で設定した回数で表示される
 				NendAdInterstitial.Instance.Show (DefineProject.NEND_AD_INTER_SPOT_ID);
 
-				DataManager.Instance.SetStageStatus (DataManager.Instance.m_iPlayLevel, DefineProject.STAGE_STATUS.CLEARED);
-				if (DataManager.Instance.GetStageStatus (DataManager.Instance.m_iPlayLevel + 1) == DefineProject.STAGE_STATUS.NONE) {
-					DataManager.Instance.SetStageStatus (DataManager.Instance.m_iPlayLevel+1, (DefineProject.STAGE_STATUS.NO_PLAY));
+				DataManagerEqual.Instance.SetStageStatus (DataManagerEqual.Instance.m_iPlayLevel, DefineProject.STAGE_STATUS.CLEARED);
+				if (DataManagerEqual.Instance.GetStageStatus (DataManagerEqual.Instance.m_iPlayLevel + 1) == DefineProject.STAGE_STATUS.NONE) {
+					DataManagerEqual.Instance.SetStageStatus (DataManagerEqual.Instance.m_iPlayLevel+1, (DefineProject.STAGE_STATUS.NO_PLAY));
 				}
 
 				m_ClearDialog.gameObject.SetActive (true);
 				TweenAlphaAll (m_ClearDialog.gameObject, 0.0f, 0.0f);
 				TweenAlphaAll (m_ClearDialog.gameObject, 0.5f, 1.0f);
-				m_ClearDialog.Initialize (DataManager.Instance.m_iPlayLevel , m_iClearScore );
+				m_ClearDialog.Initialize (DataManagerEqual.Instance.m_iPlayLevel , m_iClearScore );
 
 				m_btnBack.TriggerClear ();
 				ShowAd (false);
@@ -222,7 +222,7 @@ public class GameMain : MonoBehaviourEx {
 			break;
 		case STEP.NEXT:
 			if (bInit) {
-				DataManager.Instance.m_iPlayLevel += 1;
+				DataManagerEqual.Instance.m_iPlayLevel += 1;
 				m_eStep = STEP.START;
 			}
 			break;

@@ -14,7 +14,7 @@ extern UIViewController* UnityGetGLViewController();
 
 static NSMutableDictionary* _bannerAdDict = [NSMutableDictionary new];
 
-enum NendGravity {
+typedef NS_ENUM(NSInteger, NendGravity) {
     LEFT = 1,
     TOP = 2,
     RIGHT = 4,
@@ -23,7 +23,7 @@ enum NendGravity {
     CENTER_HORIZONTAL = 32,
 };
 
-enum NendBannerSize {
+typedef NS_ENUM(NSInteger, NendBannerSize) {
     SIZE_320X50 = 0,
     SIZE_320X100 = 1,
     SIZE_300X100 = 2,
@@ -31,12 +31,13 @@ enum NendBannerSize {
     SIZE_728X90 = 4,
 };
 
-static NSString* CreateNSString(const char* string)
+static NSString* NendUnityCreateNSString(const char* string)
 {
-    if (string)
+    if (string) {
         return @(string);
-    else
+    } else {
         return @"";
+    }
 }
 
 static CGSize BannerSize(NendBannerSize size)
@@ -62,19 +63,25 @@ static CGPoint CalculatePoint(NSInteger gravity, CGSize viewSize, NSInteger left
     CGPoint point = CGPointZero;
     CGSize screenSize = UnityGetGLView().bounds.size;
 
-    if (0 != (gravity & CENTER_HORIZONTAL))
+    if (0 != (gravity & CENTER_HORIZONTAL)) {
         point.x = (screenSize.width - viewSize.width) / 2;
-    if (0 != (gravity & RIGHT))
+    }
+    if (0 != (gravity & RIGHT)) {
         point.x = screenSize.width - viewSize.width;
-    if (0 != (gravity & LEFT))
+    }
+    if (0 != (gravity & LEFT)) {
         point.x = 0.0f;
+    }
 
-    if (0 != (gravity & CENTER_VERTICAL))
+    if (0 != (gravity & CENTER_VERTICAL)) {
         point.y = (screenSize.height - viewSize.height) / 2;
-    if (0 != (gravity & BOTTOM))
+    }
+    if (0 != (gravity & BOTTOM)) {
         point.y = screenSize.height - viewSize.height;
-    if (0 != (gravity & TOP))
+    }
+    if (0 != (gravity & TOP)) {
         point.y = 0.0f;
+    }
 
     point.x += left;
     point.y += top;
@@ -86,18 +93,20 @@ static CGPoint CalculatePoint(NSInteger gravity, CGSize viewSize, NSInteger left
 
 static BOOL ShouldAutorotateIMP(id self, SEL _cmd)
 {
-    if ([UnityGetGLViewController() respondsToSelector:@selector(shouldAutorotate)])
+    if ([UnityGetGLViewController() respondsToSelector:@selector(shouldAutorotate)]) {
         return [UnityGetGLViewController() shouldAutorotate];
-    else
+    } else {
         return YES;
+    }
 }
 
 static NSUInteger SupportedInterfaceOrientationsIMP(id self, SEL _cmd)
 {
-    if ([UnityGetGLViewController() respondsToSelector:@selector(supportedInterfaceOrientations)])
+    if ([UnityGetGLViewController() respondsToSelector:@selector(supportedInterfaceOrientations)]) {
         return [UnityGetGLViewController() supportedInterfaceOrientations];
-    else
+    } else {
         return UIInterfaceOrientationMaskAll;
+    }
 }
 
 static void AddRotateMethodToInterstitialViewController()
@@ -156,12 +165,7 @@ static NSInteger InterstitialClickTypeToInteger(NADInterstitialClickType type)
 
 - (void)dealloc
 {
-    [_gameObject release];
-    if (_loadCompletionHandler) {
-        Block_release(_loadCompletionHandler);
-        _loadCompletionHandler = NULL;
-    }
-    [super dealloc];
+    _loadCompletionHandler = NULL;
 }
 
 - (void)nadViewDidFinishLoad:(NADView*)adView
@@ -268,7 +272,7 @@ static NSInteger InterstitialClickTypeToInteger(NADInterstitialClickType type)
 
 + (instancetype)paramWithString:(NSString*)paramString
 {
-    return [[[BannerParams alloc] initWithParamString:paramString] autorelease];
+    return [[BannerParams alloc] initWithParamString:paramString];
 }
 
 - (instancetype)initWithParamString:(NSString*)paramString
@@ -288,6 +292,12 @@ static NSInteger InterstitialClickTypeToInteger(NADInterstitialClickType type)
         _topMargin = [paramArray[index++] integerValue];
         _rightMargin = [paramArray[index++] integerValue];
         _bottomMargin = [paramArray[index++] integerValue];
+        CGFloat r = [paramArray[index++] floatValue];
+        CGFloat g = [paramArray[index++] floatValue];
+        CGFloat b = [paramArray[index++] floatValue];
+        CGFloat a = [paramArray[index++] floatValue];
+        _backgroundColor = [[UIColor alloc] initWithRed:r green:g blue:b alpha:a];
+
     }
     return self;
 }
@@ -303,14 +313,6 @@ static NSInteger InterstitialClickTypeToInteger(NADInterstitialClickType type)
     self.bottomMargin = [paramArray[index++] integerValue];
 }
 
-- (void)dealloc
-{
-    [_gameObject release];
-    [_apiKey release];
-    [_spotID release];
-    [super dealloc];
-}
-
 @end
 
 //==============================================================================
@@ -319,26 +321,29 @@ static NSInteger InterstitialClickTypeToInteger(NADInterstitialClickType type)
 
 + (instancetype)bannerAdWithParams:(BannerParams*)params
 {
-    return [[[NendAdBanner alloc] initWithParams:params] autorelease];
+    return [[NendAdBanner alloc] initWithParams:params];
 }
 
 - (instancetype)initWithParams:(BannerParams*)params;
 {
     self = [super init];
     if (self) {
-        _params = [params retain];
+        _params = params;
         _rotationHandler = [NendRotationHandler new];
 
         _bannerView = [[NADView alloc] initWithIsAdjustAdSize:params.adjustSize];
+        _bannerView.backgroundColor = params.backgroundColor;
         _bannerView.hidden = YES;
         
-        NADViewEventDispatcher* dispatcher = [[NADViewEventDispatcher alloc] initWithGameObject:params.gameObject];
-        __block NendAdBanner* weakSelf = self;
-        dispatcher.loadCompletionHandler = ^{
-            [weakSelf layout];
+        _dispatcher = [[NADViewEventDispatcher alloc] initWithGameObject:params.gameObject];
+        __weak NendAdBanner* weakSelf = self;
+        _dispatcher.loadCompletionHandler = ^{
+            if (weakSelf) {
+                [weakSelf layout];
+            }
         };
         
-        _bannerView.delegate = dispatcher;
+        _bannerView.delegate = _dispatcher;
         _bannerView.isOutputLog = params.outputLog;
         [_bannerView setNendID:params.apiKey spotID:params.spotID];
     }
@@ -348,33 +353,27 @@ static NSInteger InterstitialClickTypeToInteger(NADInterstitialClickType type)
 
 - (void)dealloc
 {
-    [_rotationHandler release];
-
     [_bannerView removeFromSuperview];
-    [_bannerView.delegate release];
     _bannerView.delegate = nil;
-
-    [_bannerView release];
-    [_params release];
-
     _bannerView = nil;
     _params = nil;
-
-    [super dealloc];
 }
 
 - (void)load
 {
-    if (self.bannerView)
+    if (self.bannerView) {
         [self.bannerView load];
+    }
 }
 
 - (void)show
 {
     if (self.bannerView && self.bannerView.hidden) {
-        __block NendAdBanner* weakSelf = self;
+        __weak NendAdBanner* weakSelf = self;
         [self.rotationHandler startHandlingUsingBlock:^{
-            [weakSelf didRotate];
+            if (weakSelf) {
+                [weakSelf didRotate];
+            }
         }];
         [self layout];
         self.bannerView.hidden = NO;
@@ -391,20 +390,23 @@ static NSInteger InterstitialClickTypeToInteger(NADInterstitialClickType type)
 
 - (void)resume
 {
-    if (self.bannerView)
+    if (self.bannerView) {
         [self.bannerView resume];
+    }
 }
 
 - (void)pause
 {
-    if (self.bannerView)
+    if (self.bannerView) {
         [self.bannerView pause];
+    }
 }
 
 - (void)layout
 {
-    if (!self.bannerView)
+    if (!self.bannerView) {
         return;
+    }
     
     CGSize bannerSize;
     if (self.params.adjustSize) {
@@ -457,7 +459,7 @@ static NSInteger InterstitialClickTypeToInteger(NADInterstitialClickType type)
     self.block = block;
 }
 
-- (void) stopHandling
+- (void)stopHandling
 {
     self.block = NULL;
 }
@@ -465,11 +467,7 @@ static NSInteger InterstitialClickTypeToInteger(NADInterstitialClickType type)
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
-    if (_block) {
-        Block_release(_block);
-        _block = NULL;
-    }
-    [super dealloc];
+    _block = NULL;
 }
 
 - (void)didRotate:(NSNotification *)note
@@ -488,60 +486,68 @@ static NSInteger InterstitialClickTypeToInteger(NADInterstitialClickType type)
 void _TryCreateBanner(const char* paramString)
 {
     BOOL didLoaded = NO;
-    BannerParams* params = [BannerParams paramWithString:CreateNSString(paramString)];
+    BannerParams* params = [BannerParams paramWithString:NendUnityCreateNSString(paramString)];
     NendAdBanner* ad = _bannerAdDict[params.gameObject];
 
     if (!ad) {
         ad = [NendAdBanner bannerAdWithParams:params];
         _bannerAdDict[params.gameObject] = ad;
-    } else
+    } else {
         didLoaded = YES;
-
-    if (!ad.bannerView.superview)
+    }
+    
+    if (!ad.bannerView.superview) {
         [UnityGetGLView() addSubview:ad.bannerView];
-
-    if (!didLoaded)
+    }
+    
+    if (!didLoaded) {
         [ad.bannerView load];
+    }
 }
 
 void _ShowBanner(const char* gameObject)
 {
-    NendAdBanner* ad = _bannerAdDict[CreateNSString(gameObject)];
-    if (ad)
+    NendAdBanner* ad = _bannerAdDict[NendUnityCreateNSString(gameObject)];
+    if (ad) {
         [ad show];
+    }
 }
 
 void _HideBanner(const char* gameObject)
 {
-    NendAdBanner* ad = _bannerAdDict[CreateNSString(gameObject)];
-    if (ad)
+    NendAdBanner* ad = _bannerAdDict[NendUnityCreateNSString(gameObject)];
+    if (ad) {
         [ad hide];
+    }
 }
 
 void _ResumeBanner(const char* gameObject)
 {
-    NendAdBanner* ad = _bannerAdDict[CreateNSString(gameObject)];
-    if (ad)
+    NendAdBanner* ad = _bannerAdDict[NendUnityCreateNSString(gameObject)];
+    if (ad) {
         [ad resume];
+    }
 }
 
 void _PauseBanner(const char* gameObject)
 {
-    NendAdBanner* ad = _bannerAdDict[CreateNSString(gameObject)];
-    if (ad)
+    NendAdBanner* ad = _bannerAdDict[NendUnityCreateNSString(gameObject)];
+    if (ad) {
         [ad pause];
+    }
 }
 
 void _DestroyBanner(const char* gameObject)
 {
-    [_bannerAdDict removeObjectForKey:CreateNSString(gameObject)];
+    [_bannerAdDict removeObjectForKey:NendUnityCreateNSString(gameObject)];
 }
 
 void _LayoutBanner(const char* gameObject, const char* paramString)
 {
-    NendAdBanner* ad = _bannerAdDict[CreateNSString(gameObject)];
-    if (ad)
-        [ad updateLayoutWithString:CreateNSString(paramString)];
+    NendAdBanner* ad = _bannerAdDict[NendUnityCreateNSString(gameObject)];
+    if (ad) {
+        [ad updateLayoutWithString:NendUnityCreateNSString(paramString)];
+    }
 }
 
 void _LoadInterstitialAd(const char* apiKey, const char* spotId, BOOL isOutputLog)
@@ -551,18 +557,18 @@ void _LoadInterstitialAd(const char* apiKey, const char* spotId, BOOL isOutputLo
     [NADInterstitial sharedInstance].isOutputLog = isOutputLog;
     [NADInterstitial sharedInstance].delegate = [NADInterstitialEventDispatcher sharedDispatcher];
 
-    [[NADInterstitial sharedInstance] loadAdWithApiKey:CreateNSString(apiKey) spotId:CreateNSString(spotId)];
+    [[NADInterstitial sharedInstance] loadAdWithApiKey:NendUnityCreateNSString(apiKey) spotId:NendUnityCreateNSString(spotId)];
 }
 
 void _ShowInterstitialAd(const char* spotId)
 {
-    NSString* spot = CreateNSString(spotId);
+    NSString* spot = NendUnityCreateNSString(spotId);
     NADInterstitialShowResult result;
-    if (spot && 0 < spot.length)
+    if (spot && 0 < spot.length) {
         result = [[NADInterstitial sharedInstance] showAdWithSpotId:spot];
-    else
+    } else {
         result = [[NADInterstitial sharedInstance] showAd];
-
+    }
     [[NADInterstitialEventDispatcher sharedDispatcher] dispatchShowResult:result spotId:spot];
 }
 

@@ -71,16 +71,17 @@ public class SelectMain : ButtonManager {
 				FadeInOut.Instance.Close (0.0f);
 				m_csCenterOnChild.onCenter = DragBanner;
 
-				if (DataManager.Instance.m_iPlayLevel == 0) {
-					DataManager.Instance.m_iPlayLevel = 1;
+				if (DataManagerEqual.Instance.m_iPlayLevel == 0) {
+					DataManagerEqual.Instance.m_iPlayLevel = 1;
 				}
 
 				// 初期化処理
 				if (false == PlayerPrefs.HasKey (DefineProject.GetKeyStage (1))) {
-					DataManager.Instance.SetStageStatus (1, DefineProject.STAGE_STATUS.NO_PLAY);
+					DataManagerEqual.Instance.SetStageStatus (1, DefineProject.STAGE_STATUS.NO_PLAY);
 				}
 				m_goIconRootList.Clear ();
-				ButtonRefresh (PAGE_NUM * PAGE_DISP_ICON);
+				ButtonRefresh ();
+				//ButtonRefresh (PAGE_NUM * PAGE_DISP_ICON);
 
 				for (int page = 0; page < PAGE_NUM; page++) {
 					GameObject objList = PrefabManager.Instance.MakeObject ("prefab/LevelIconPage", m_goScrollView);
@@ -90,7 +91,8 @@ public class SelectMain : ButtonManager {
 					for (int icon = 0; icon < PAGE_DISP_ICON; icon++) {
 						GameObject objIcon = PrefabManager.Instance.MakeObject ("prefab/LevelIcon", objList);
 
-						AddButtonBase (page * PAGE_DISP_ICON + icon, objIcon);
+						AddButtonBase (objIcon);
+						//AddButtonBase (page * PAGE_DISP_ICON + icon, objIcon);
 
 						int iLevel = page * PAGE_DISP_ICON + icon + 1;
 						objIcon.GetComponent<LevelIcon> ().Initialize (iLevel);
@@ -100,7 +102,7 @@ public class SelectMain : ButtonManager {
 				m_goScrollView.GetComponent<UIGrid> ().enabled = true;
 
 				// 順番的にここでやらないと反応できない
-				SetBanner ((DataManager.Instance.m_iPlayLevel - 1) / PAGE_DISP_ICON);
+				SetBanner ((DataManagerEqual.Instance.m_iPlayLevel - 1) / PAGE_DISP_ICON);
 
 				ButtonInit ();
 				TriggerClearAll ();
@@ -125,19 +127,21 @@ public class SelectMain : ButtonManager {
 
 				int iLevel = Index + 1;
 
-				DefineProject.STAGE_STATUS eStageStatus = DataManager.Instance.GetStageStatus (iLevel);
+				DefineProject.STAGE_STATUS eStageStatus = DataManagerEqual.Instance.GetStageStatus (iLevel);
 				if (eStageStatus == DefineProject.STAGE_STATUS.NONE) {
 				} else {
 					// 補正
-					DataManager.Instance.m_iPlayLevel = Index + 1;
+					DataManagerEqual.Instance.m_iPlayLevel = Index + 1;
 					m_eStep = STEP.START_GAME;
 				}
 			} else if (m_btnNext.ButtonPushed) {
+				Debug.Log ("here");
 				m_btnNext.TriggerClear ();
 				m_iPageIndex += 1;
 				m_iPageIndex %= PAGE_NUM;
 				SetBanner (m_iPageIndex);
 			} else if (m_btnPrev.ButtonPushed) {
+				Debug.Log ("here2");
 				m_btnPrev.TriggerClear ();
 				m_iPageIndex -= 1;
 				if (m_iPageIndex < 0) {
@@ -197,7 +201,7 @@ public class SelectMain : ButtonManager {
 		foreach (GameObject obj in m_goIconRootList) {
 			int banner_id = int.Parse (obj.name.Replace (STR_PAGE_ROOT, ""));
 
-			//Debug.Log (banner_id);
+			Debug.Log (banner_id);
 			if (banner_id == _iBannerId) {
 				m_iPageIndex = _iBannerId;
 				SetExplainText (m_iPageIndex);

@@ -76,7 +76,7 @@ public class TitleMain : MonoBehaviourEx {
 		m_StageSelect.gameObject.SetActive (false);
 		m_ScoreAttack.gameObject.SetActive (false);
 
-		DataManager.Instance.m_iPlayLevel = 0;
+		DataManagerEqual.Instance.m_iPlayLevel = 0;
 		string strReviewCount = "review_count";
 		string strReview = "review";
 
@@ -185,7 +185,7 @@ public class TitleMain : MonoBehaviourEx {
 				ShowAd (false);
 				FadeInOut.Instance.Close (0.25f);
 			}
-			if (FadeInOut.Instance.IsIdle () && DataManager.Instance.IsReadyStageData) {
+			if (FadeInOut.Instance.IsIdle () && DataManagerEqual.Instance.IsReadyStageData) {
 				Application.LoadLevelAsync ("select");
 			}
 			break;

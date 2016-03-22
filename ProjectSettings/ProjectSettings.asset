@@ -333,7 +333,8 @@ PlayerSettings:
   psp2InfoBarColor: 0
   psmSplashimage: {fileID: 0}
   spritePackerPolicy: 
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    7: NOUSE_MINIJSON;USE_NGUI
   metroPackageName: sumrin
   metroPackageVersion: 
   metroCertificatePath: 
@@ -446,13 +447,17 @@ PlayerSettings:
   WebGL::useEmbeddedResources: 0
   XboxOne::enus: 1
   stringPropertyNames:
+  - Build_ServiceEnabled::Build_ServiceEnabled
+  - UNet_ServiceEnabled::UNet_ServiceEnabled
   - WebGL::emscriptenArgs
   - WebGL::template
   - additionalIl2CppArgs::additionalIl2CppArgs
+  Build_ServiceEnabled::Build_ServiceEnabled: True
+  UNet_ServiceEnabled::UNet_ServiceEnabled: True
   WebGL::emscriptenArgs: 
   WebGL::template: APPLICATION:Default
   additionalIl2CppArgs::additionalIl2CppArgs: 
-  cloudProjectId: 
-  projectName: 
-  organizationId: 
+  cloudProjectId: d5370527-3a9d-4071-b173-747b6c15d3c8
+  projectName: "\u3044\u301C\u304F\u3042\u308B"
+  organizationId: b6c9d8fa-610c-47c7-8a17-7d6c7bd434dd
   cloudEnabled: 0

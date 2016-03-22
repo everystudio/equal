@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 
-using NendUnityPlugin.Callback;
 using NendUnityPlugin.Platform;
 using NendUnityPlugin.Common;
 
@@ -24,18 +23,6 @@ namespace NendUnityPlugin.AD
 		public static NendAdInterstitial Instance {
 			get {
 				return _instance;
-			}
-		}
-		
-		private NendAdInterstitialCallback _callback = null;
-		/// <summary>
-		/// Sets the callback.
-		/// </summary>
-		/// \deprecated Use <c>EventHandler</c> instead.
-		[Obsolete ("Use EventHandler instead")]
-		public NendAdInterstitialCallback Callback {
-			set {
-				_callback = value;
 			}
 		}
 
@@ -150,13 +137,6 @@ namespace NendUnityPlugin.AD
 				args.SpotId = spotId;
 				handler(this, args);
 			}
-			if (null != _callback) {
-				if (_callback is NendAdInterstitialCallbackWithSpot) {
-					((NendAdInterstitialCallbackWithSpot)_callback).OnFinishLoadInterstitialAd (status, spotId);
-				} else {
-					_callback.OnFinishLoadInterstitialAd (status);
-				}			
-			}
 		}
 		
 		void NendAdInterstitial_OnClickAd (string message)
@@ -174,13 +154,6 @@ namespace NendUnityPlugin.AD
 				args.SpotId = spotId;
 				handler(this, args);
 			}
-			if (null != _callback) {
-				if (_callback is NendAdInterstitialCallbackWithSpot) {
-					((NendAdInterstitialCallbackWithSpot)_callback).OnClickInterstitialAd (type, spotId);
-				} else {
-					_callback.OnClickInterstitialAd (type);
-				}
-			}
 		}
 		
 		void NendAdInterstitial_OnShowAd (string message)
@@ -197,13 +170,6 @@ namespace NendUnityPlugin.AD
 				args.ShowResult = result;
 				args.SpotId = spotId;
 				handler(this, args);
-			}
-			if (null != _callback) {
-				if (_callback is NendAdInterstitialCallbackWithSpot) {
-					((NendAdInterstitialCallbackWithSpot)_callback).OnShowInterstitialAd (result, spotId);
-				} else {
-					_callback.OnShowInterstitialAd (result);
-				}
 			}
 		}		
 	}

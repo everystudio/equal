@@ -8,25 +8,25 @@ SceneSettings:
   m_PVSPortalsArray: []
   m_OcclusionBakeSettings:
     smallestOccluder: 5
-    smallestHole: .25
+    smallestHole: 0.25
     backfaceThreshold: 100
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
   m_Fog: 0
-  m_FogColor: {r: .5, g: .5, b: .5, a: 1}
+  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
-  m_FogDensity: .00999999978
+  m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: .211999997, g: .226999998, b: .259000003, a: 1}
-  m_AmbientEquatorColor: {r: .114, g: .125, b: .133000001, a: 1}
-  m_AmbientGroundColor: {r: .0469999984, g: .0430000015, b: .0350000001, a: 1}
+  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
-  m_HaloStrength: .5
+  m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
@@ -40,7 +40,7 @@ RenderSettings:
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 5
+  serializedVersion: 6
   m_GIWorkflowMode: 0
   m_LightmapsMode: 1
   m_GISettings:
@@ -66,7 +66,7 @@ LightmapSettings:
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
     m_ReflectionCompression: 2
-  m_LightmapSnapshot: {fileID: 0}
+  m_LightingDataAsset: {fileID: 0}
   m_RuntimeCPUUsage: 25
 --- !u!196 &5
 NavMeshSettings:
@@ -74,15 +74,15 @@ NavMeshSettings:
   m_ObjectHideFlags: 0
   m_BuildSettings:
     serializedVersion: 2
-    agentRadius: .5
+    agentRadius: 0.5
     agentHeight: 2
     agentSlope: 45
-    agentClimb: .400000006
+    agentClimb: 0.4
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     accuratePlacement: 0
     minRegionArea: 2
-    cellSize: .166666672
+    cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1 &132884522
@@ -190,7 +190,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: .922109544, g: 1, b: .647058845, a: 1}
+  mColor: {r: 0.92210954, g: 1, b: 0.64705884, a: 1}
   mPivot: 4
   mWidth: 300
   mHeight: 100
@@ -216,7 +216,7 @@ MonoBehaviour:
   mMaterial: {fileID: 0}
   mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
-  mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   mSpacingX: 0
   mSpacingY: 0
   mUseFloatSpacing: 0
@@ -298,6 +298,9 @@ MonoBehaviour:
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   centerType: 1
   leftType: 1
   rightType: 1
@@ -346,11 +349,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 361676452}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6bd161639bec4b77b23c230ae3ca388, type: 3}
+  m_Script: {fileID: 11500000, guid: 40eda5f16e8d2d640bd158e77cb53d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_intIndex: 0
-  m_bButtonClicked: 0
 --- !u!114 &361676455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,6 +421,9 @@ MonoBehaviour:
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   centerType: 1
   leftType: 1
   rightType: 1
@@ -498,6 +502,9 @@ MonoBehaviour:
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   centerType: 1
   leftType: 1
   rightType: 1
@@ -588,7 +595,7 @@ MonoBehaviour:
   mMaterial: {fileID: 0}
   mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
-  mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   mSpacingX: 0
   mSpacingY: 0
   mUseFloatSpacing: 0
@@ -670,6 +677,9 @@ MonoBehaviour:
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   centerType: 1
   leftType: 1
   rightType: 1
@@ -687,7 +697,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -128.699997
+      value: -128.7
       objectReference: {fileID: 0}
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_LocalPosition.y
@@ -707,11 +717,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_LocalRotation.z
-      value: .0881989151
+      value: 0.088198915
       objectReference: {fileID: 0}
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_LocalRotation.w
-      value: .99610287
+      value: 0.99610287
       objectReference: {fileID: 0}
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_RootOrder
@@ -830,7 +840,7 @@ MonoBehaviour:
   mMaterial: {fileID: 0}
   mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
-  mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   mSpacingX: 0
   mSpacingY: 0
   mUseFloatSpacing: 0
@@ -851,7 +861,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -257.399994
+      value: -257.4
       objectReference: {fileID: 0}
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_LocalPosition.y
@@ -871,11 +881,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_LocalRotation.z
-      value: .0881989151
+      value: 0.088198915
       objectReference: {fileID: 0}
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_LocalRotation.w
-      value: .99610287
+      value: 0.99610287
       objectReference: {fileID: 0}
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_RootOrder
@@ -1015,6 +1025,9 @@ MonoBehaviour:
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   centerType: 1
   leftType: 1
   rightType: 1
@@ -1046,7 +1059,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 897177336}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 103.169998, z: 0}
+  m_LocalPosition: {x: 0, y: 103.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 723101613}
@@ -1071,7 +1084,7 @@ MonoBehaviour:
   sorting: 0
   pivot: 4
   maxPerLine: 0
-  cellWidth: 128.699997
+  cellWidth: 128.7
   cellHeight: 200
   animateSmoothly: 0
   hideInactive: 0
@@ -1103,7 +1116,7 @@ Transform:
   m_GameObject: {fileID: 1016475187}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00176056335, y: .00176056335, z: .00176056335}
+  m_LocalScale: {x: 0.0017605633, y: 0.0017605633, z: 0.0017605633}
   m_Children:
   - {fileID: 1266226448}
   - {fileID: 1493801427}
@@ -1120,7 +1133,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: .0500000007
+  m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
@@ -1170,6 +1183,7 @@ MonoBehaviour:
   mClipSoftness: {x: 4, y: 4}
   mDepth: 0
   mSortingOrder: 0
+  mSortingLayerName: 
   mClipOffset: {x: 0, y: 0}
 --- !u!114 &1016475191
 MonoBehaviour:
@@ -1240,14 +1254,14 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
     height: 1
-  near clip plane: .300000012
+  near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -1263,7 +1277,7 @@ Camera:
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
-  m_StereoSeparation: .0219999999
+  m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
 --- !u!4 &1069843912
 Transform:
@@ -1308,7 +1322,6 @@ MonoBehaviour:
     apiKey: 64303738663537313366306538623830386635393061393236313263373836663664633935613132
     spotID: 443848
   automaticDisplay: 0
-  outputLog: 0
   orientation: 0
   gravity: 0800000020000000
   margin:
@@ -1402,11 +1415,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_LocalRotation.z
-      value: .0881989151
+      value: 0.088198915
       objectReference: {fileID: 0}
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_LocalRotation.w
-      value: .99610287
+      value: 0.99610287
       objectReference: {fileID: 0}
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_RootOrder
@@ -1466,8 +1479,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1208014984}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -.151802659, z: 0}
-  m_LocalScale: {x: .00379506638, y: .00379506638, z: .00379506638}
+  m_LocalPosition: {x: 0, y: -0.15180266, z: 0}
+  m_LocalScale: {x: 0.0037950664, y: 0.0037950664, z: 0.0037950664}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1569,7 +1582,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 3
-  m_BackGroundColor: {r: .5, g: .5, b: .5, a: 1}
+  m_BackGroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -1592,7 +1605,7 @@ Camera:
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
-  m_StereoSeparation: .0219999999
+  m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
 --- !u!1 &1274752535
 GameObject:
@@ -1619,7 +1632,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 6
   m_Type: 1
-  m_Color: {r: 1, g: .956862748, b: .839215696, a: 1}
+  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -1628,8 +1641,9 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_Strength: 1
-    m_Bias: .0500000007
-    m_NormalBias: .400000006
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
@@ -1648,7 +1662,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1274752535}
-  m_LocalRotation: {x: .408217937, y: -.234569728, z: .109381676, w: .875426054}
+  m_LocalRotation: {x: 0.40821794, y: -0.23456973, z: 0.109381676, w: 0.87542605}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1739,7 +1753,7 @@ MonoBehaviour:
   mMaterial: {fileID: 0}
   mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
-  mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   mSpacingX: 0
   mSpacingY: 0
   mUseFloatSpacing: 0
@@ -1867,6 +1881,9 @@ MonoBehaviour:
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   centerType: 1
   leftType: 1
   rightType: 1
@@ -1935,7 +1952,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: .661764741, g: .958012164, b: 1, a: 1}
+  mColor: {r: 0.66176474, g: 0.95801216, b: 1, a: 1}
   mPivot: 4
   mWidth: 2000
   mHeight: 2000
@@ -1949,6 +1966,9 @@ MonoBehaviour:
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   centerType: 1
   leftType: 1
   rightType: 1
@@ -2058,6 +2078,9 @@ MonoBehaviour:
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   centerType: 1
   leftType: 1
   rightType: 1
@@ -2114,7 +2137,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1568041196}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -.151802659, z: 0}
+  m_LocalPosition: {x: 0, y: -0.15180266, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2194,6 +2217,9 @@ MonoBehaviour:
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   centerType: 1
   leftType: 1
   rightType: 1
@@ -2283,7 +2309,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.66666663
+  aspectRatio: 1.6666666
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   mFont: {fileID: 0}
@@ -2301,7 +2327,7 @@ MonoBehaviour:
   mMaterial: {fileID: 0}
   mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
-  mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   mSpacingX: 0
   mSpacingY: 0
   mUseFloatSpacing: 0
@@ -2395,7 +2421,7 @@ MonoBehaviour:
   mMaterial: {fileID: 0}
   mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
-  mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   mSpacingX: 0
   mSpacingY: 0
   mUseFloatSpacing: 0
@@ -2521,6 +2547,9 @@ MonoBehaviour:
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   centerType: 1
   leftType: 1
   rightType: 1
@@ -2538,7 +2567,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 128.699982
+      value: 128.69998
       objectReference: {fileID: 0}
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2558,11 +2587,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_LocalRotation.z
-      value: .0881989151
+      value: 0.088198915
       objectReference: {fileID: 0}
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_LocalRotation.w
-      value: .99610287
+      value: 0.99610287
       objectReference: {fileID: 0}
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_RootOrder
@@ -2651,7 +2680,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 257.399994
+      value: 257.4
       objectReference: {fileID: 0}
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2671,11 +2700,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_LocalRotation.z
-      value: .0881989151
+      value: 0.088198915
       objectReference: {fileID: 0}
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_LocalRotation.w
-      value: .99610287
+      value: 0.99610287
       objectReference: {fileID: 0}
     - target: {fileID: 455330, guid: 61cab58db5d42427e88bb23a17f7ef34, type: 2}
       propertyPath: m_RootOrder
@@ -2869,7 +2898,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: 1, g: .705882311, b: .705882311, a: 1}
+  mColor: {r: 1, g: 0.7058823, b: 0.7058823, a: 1}
   mPivot: 4
   mWidth: 300
   mHeight: 100
@@ -2895,7 +2924,7 @@ MonoBehaviour:
   mMaterial: {fileID: 0}
   mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
-  mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   mSpacingX: 0
   mSpacingY: 0
   mUseFloatSpacing: 0
@@ -2989,7 +3018,7 @@ MonoBehaviour:
   mMaterial: {fileID: 0}
   mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
-  mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   mSpacingX: 0
   mSpacingY: 0
   mUseFloatSpacing: 0

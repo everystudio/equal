@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: edc8b3634500c44a19c011f4d9b78236
-timeCreated: 1433727816
+guid: 5455e0b38d36046eda7d7a8a64f26c83
+timeCreated: 1450159592
 licenseType: Free
 PluginImporter:
   serializedVersion: 1
@@ -37,10 +37,6 @@ PluginImporter:
       enabled: 0
       settings:
         CPU: AnyCPU
-    SamsungTV:
-      enabled: 0
-      settings:
-        STV_MODEL: STANDARD_13
     Win:
       enabled: 0
       settings:
@@ -53,7 +49,7 @@ PluginImporter:
       enabled: 1
       settings:
         CompileFlags: 
-        FrameworkDependencies: AdSupport;Security;ImageIO;
+        FrameworkDependencies: Security;ImageIO;
   userData: 
   assetBundleName: 
   assetBundleVariant: 

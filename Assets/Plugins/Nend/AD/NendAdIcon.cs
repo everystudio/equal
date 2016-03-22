@@ -5,7 +5,6 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 
-using NendUnityPlugin.Callback;
 using NendUnityPlugin.Layout;
 using NendUnityPlugin.Common;
 using NendUnityPlugin.Platform;
@@ -42,8 +41,6 @@ namespace NendUnityPlugin.AD
 		[SerializeField]
 		bool automaticDisplay = true;
 		[SerializeField]
-		bool outputLog = false;
-		[SerializeField]
 		Orientation orientation;
 		[SerializeField]
 		Gravity[] gravity;
@@ -51,18 +48,6 @@ namespace NendUnityPlugin.AD
 		Margin margin;
 		[SerializeField]
 		Icon[] icon = new Icon[4];
-
-		private NendAdIconCallback _callback = null;
-		/// <summary>
-		/// Sets the callback.
-		/// </summary>
-		/// \deprecated Use <c>EventHandler</c> instead.
-		[Obsolete ("Use EventHandler instead")]
-		public NendAdIconCallback Callback {
-			set {
-				_callback = value;
-			}
-		}
 
 		private NendAdIconInterface _interface = null;
 		private NendAdIconInterface Interface {
@@ -178,8 +163,6 @@ namespace NendUnityPlugin.AD
 			builder.Append(":");
 			builder.Append(account.spotID);
 			builder.Append (":");
-			builder.Append (outputLog ? "true" : "false");
-			builder.Append (":");
 			builder.Append ((int)orientation);
 			builder.Append (":");
 			builder.Append (GetBitGravity (gravity));
@@ -227,9 +210,6 @@ namespace NendUnityPlugin.AD
 			if (null != handler) {
 				handler (this, EventArgs.Empty);
 			}
-			if (null != _callback) {
-				_callback.OnFinishLoadIcon ();
-			}
 		}
 		
 		void NendAdIconLoader_OnFailToReceiveAd (string message)
@@ -245,9 +225,6 @@ namespace NendUnityPlugin.AD
 				args.Message = errorInfo [1];
 				handler (this, args);
 			}
-			if (null != _callback) {
-				_callback.OnFailToReceiveIconAd ((NendErrorCode)int.Parse (errorInfo [0]), errorInfo [1]);
-			}
 		}
 		
 		void NendAdIconLoader_OnReceiveAd (string message)
@@ -255,9 +232,6 @@ namespace NendUnityPlugin.AD
 			EventHandler handler = AdReceived;
 			if (null != handler) {
 				handler (this, EventArgs.Empty);
-			}
-			if (null != _callback) {
-				_callback.OnReceiveIconAd ();
 			}
 		}
 		
@@ -267,9 +241,6 @@ namespace NendUnityPlugin.AD
 			if (null != handler) {
 				handler (this, EventArgs.Empty);
 			}
-			if (null != _callback) {
-				_callback.OnClickIconAd ();
-			}		
 		}
 		
 		private bool hasDuplicatedTag (Icon[] icon)

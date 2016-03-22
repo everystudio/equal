@@ -17,7 +17,7 @@ namespace NendUnityPlugin.Platform.Android
 
 		public void LoadInterstitialAd (string apiKey, string spotId, bool isOutputLog)
 		{
-			plugin.CallStatic ("_LoadInterstitialAd", apiKey, spotId, isOutputLog); 
+			plugin.CallStatic ("_LoadInterstitialAd", apiKey, spotId); 
 		}
 
 		public void ShowInterstitialAd (string spotId)

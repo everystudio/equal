@@ -3,7 +3,6 @@ using UnityEngine;
 using System;
 using System.Text;
 
-using NendUnityPlugin.Callback;
 using NendUnityPlugin.Layout;
 using NendUnityPlugin.Common;
 using NendUnityPlugin.Platform;
@@ -37,6 +36,7 @@ namespace NendUnityPlugin.AD
 		Account account;
 		[SerializeField]
 		bool automaticDisplay = true;
+		#pragma warning disable 414
 		[SerializeField]
 		bool outputLog = false;
 		[SerializeField]
@@ -44,21 +44,11 @@ namespace NendUnityPlugin.AD
 		[SerializeField]
 		BannerSize size;
 		[SerializeField]
+		Color backgroundColor = Color.clear;
+		[SerializeField]
 		Gravity[] gravity;
 		[SerializeField]
 		Margin margin;
-
-		private NendAdBannerCallback _callback = null;
-		/// <summary>
-		/// Sets the callback.
-		/// </summary>
-		/// \deprecated Use <c>EventHandler</c> instead.
-		[Obsolete ("Use EventHandler instead")]
-		public NendAdBannerCallback Callback {
-			set {
-				_callback = value;
-			}
-		}
 
 		private NendAdBannerInterface _interface = null;
 		private NendAdBannerInterface Interface {
@@ -171,21 +161,23 @@ namespace NendUnityPlugin.AD
 			StringBuilder builder = new StringBuilder ();
 			builder.Append (gameObject.name);
 			builder.Append (":");
-#if UNITY_ANDROID && !UNITY_EDITOR
+			#if UNITY_ANDROID && !UNITY_EDITOR
 			builder.Append(account.android.apiKey);
 			builder.Append(":");
 			builder.Append(account.android.spotID);
-#elif UNITY_IPHONE && !UNITY_EDITOR
+			#elif UNITY_IPHONE && !UNITY_EDITOR
 			builder.Append(account.iOS.apiKey);
 			builder.Append(":");
 			builder.Append(account.iOS.spotID);
-#else
+			#else
 			builder.Append ("");
 			builder.Append (":");
 			builder.Append (0);
-#endif
+			#endif
+			#if UNITY_IPHONE && !UNITY_EDITOR
 			builder.Append (":");
 			builder.Append (outputLog ? "true" : "false");
+			#endif
 			builder.Append (":");
 			builder.Append (adjustSize ? "true" : "false");
 			builder.Append (":");
@@ -200,6 +192,14 @@ namespace NendUnityPlugin.AD
 			builder.Append (margin.right);
 			builder.Append (":");
 			builder.Append (margin.bottom);
+			builder.Append (":");
+			builder.Append (backgroundColor.r);
+			builder.Append (":");
+			builder.Append (backgroundColor.g);
+			builder.Append (":");
+			builder.Append (backgroundColor.b);
+			builder.Append (":");
+			builder.Append (backgroundColor.a);
 			return builder.ToString ();
 		}
 		
@@ -208,9 +208,6 @@ namespace NendUnityPlugin.AD
 			EventHandler handler = AdLoaded;
 			if (null != handler) {
 				handler (this, EventArgs.Empty);
-			}
-			if (null != _callback) {
-				_callback.OnFinishLoadBanner ();
 			}
 		}
 		
@@ -227,9 +224,6 @@ namespace NendUnityPlugin.AD
 				args.Message = errorInfo [1];
 				handler (this, args);
 			}
-			if (null != _callback) {
-				_callback.OnFailToReceiveBannerAd ((NendErrorCode)int.Parse (errorInfo [0]), errorInfo [1]);
-			}
 		}
 		
 		void NendAdView_OnReceiveAd (string message)
@@ -237,9 +231,6 @@ namespace NendUnityPlugin.AD
 			EventHandler handler = AdReceived;
 			if (null != handler) {
 				handler (this, EventArgs.Empty);
-			}
-			if (null != _callback) {
-				_callback.OnReceiveBannerAd ();
 			}
 		}
 		
@@ -249,9 +240,6 @@ namespace NendUnityPlugin.AD
 			if (null != handler) {
 				handler (this, EventArgs.Empty);
 			}
-			if (null != _callback) {
-				_callback.OnClickBannerAd ();
-			}
 		}
 		
 		void NendAdView_OnDismissScreen (string message)
@@ -259,9 +247,6 @@ namespace NendUnityPlugin.AD
 			EventHandler handler = AdBacked;
 			if (null != handler) {
 				handler (this, EventArgs.Empty);
-			}
-			if (null != _callback) {
-				_callback.OnDismissScreen ();
 			}
 		}		
 	}

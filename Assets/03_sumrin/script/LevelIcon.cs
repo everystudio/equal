@@ -17,7 +17,7 @@ public class LevelIcon : ButtonBase {
 
 		m_lbText.text = _iLevel.ToString ();
 
-		DefineProject.STAGE_STATUS eStageStatus = DataManager.Instance.GetStageStatus (_iLevel);
+		DefineProject.STAGE_STATUS eStageStatus = DataManagerEqual.Instance.GetStageStatus (_iLevel);
 
 		switch( eStageStatus){
 		case DefineProject.STAGE_STATUS.NONE:
