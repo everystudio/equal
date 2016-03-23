@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using NendUnityPlugin.AD;
+using UnityEngine.SceneManagement;
 
 using Prime31;
 
@@ -13,11 +14,15 @@ public class TitleMain : MonoBehaviourEx {
 	[SerializeField]
 	private TapStart m_ScoreAttack;
 	[SerializeField]
+	private ButtonBase m_btnHelp;
+	[SerializeField]
 	private ReviewDialog m_ReviewDialog;
 	#if UNITY_ANDROID
 	[SerializeField]
 	private NendAdIcon m_NendAdIcon;
 	#endif
+	public GameObject m_goDispRoot;
+	private PageBase m_Page;
 
 	private float m_fTimer;
 
@@ -29,6 +34,7 @@ public class TitleMain : MonoBehaviourEx {
 		REVIEW			,
 		REVIEW_THANKYOU	,
 		MODE_SELECT		,
+		HELP			,
 
 		DELAY_STAGE_SELECT	,
 		DELAY_SCORE_ATTACK	,
@@ -74,6 +80,7 @@ public class TitleMain : MonoBehaviourEx {
 		FadeInOut.Instance.Open (0.5f);
 	
 		m_StageSelect.gameObject.SetActive (false);
+		m_btnHelp.gameObject.SetActive (false);
 		m_ScoreAttack.gameObject.SetActive (false);
 
 		DataManagerEqual.Instance.m_iPlayLevel = 0;
@@ -147,19 +154,35 @@ public class TitleMain : MonoBehaviourEx {
 			if (bInit) {
 				m_TapStart.gameObject.SetActive (false);
 				m_StageSelect.gameObject.SetActive (true);
+				m_btnHelp.gameObject.SetActive (true);
 				//m_ScoreAttack.gameObject.SetActive (true);
 
 				m_StageSelect.TriggerClear ();
 				m_ScoreAttack.TriggerClear ();
+				m_btnHelp.TriggerClear ();
 			}
 			if (m_StageSelect.ButtonPushed) {
 				m_eStep = STEP.DELAY_STAGE_SELECT;
 			} else if (m_ScoreAttack.ButtonPushed) {
 				m_eStep = STEP.DELAY_SCORE_ATTACK;
+			} else if (m_btnHelp.ButtonPushed) {
+				m_eStep = STEP.HELP;
 			} else {
 			}
 			break;
 
+		case STEP.HELP:
+			if (bInit) {
+				m_NendAdIcon.Hide ();
+				m_Page = PrefabManager.Instance.MakeScript<HelpMain> ("prefab/RootHelp", m_goDispRoot);
+				m_Page.PageStart ();
+			}
+			if (m_Page.IsEnd ()) {
+				m_eStep = STEP.MODE_SELECT;
+				Destroy (m_Page.gameObject);
+				m_NendAdIcon.Show ();
+			}
+			break;
 		case STEP.DELAY_STAGE_SELECT:
 			if (bInit) {
 				m_fTimer = 0.0f;
@@ -186,7 +209,7 @@ public class TitleMain : MonoBehaviourEx {
 				FadeInOut.Instance.Close (0.25f);
 			}
 			if (FadeInOut.Instance.IsIdle () && DataManagerEqual.Instance.IsReadyStageData) {
-				Application.LoadLevelAsync ("select");
+				SceneManager.LoadScene ("select");
 			}
 			break;
 		case STEP.SCORE_ATTACK:

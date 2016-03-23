@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class SelectMain : ButtonManager {
 
@@ -20,11 +21,15 @@ public class SelectMain : ButtonManager {
 	#endregion
 	private GameObject m_goCenter;
 
+	public GameObject m_goDispRoot;
+	public ButtonBase m_btnHelp;
+	private PageBase m_page;
 
 	public enum STEP
 	{
 		INIT		= 0,
 		IDLE		,
+		HELP		,
 		CLOSE		,
 		END			,
 
@@ -55,7 +60,7 @@ public class SelectMain : ButtonManager {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	new void Update () {
 
 		bool bInit = false;
 		if (m_eStepPre != m_eStep) {
@@ -70,7 +75,7 @@ public class SelectMain : ButtonManager {
 				m_fTimer = 0.0f;
 				FadeInOut.Instance.Close (0.0f);
 				m_csCenterOnChild.onCenter = DragBanner;
-
+				m_btnHelp.TriggerClear ();
 				if (DataManagerEqual.Instance.m_iPlayLevel == 0) {
 					DataManagerEqual.Instance.m_iPlayLevel = 1;
 				}
@@ -119,7 +124,7 @@ public class SelectMain : ButtonManager {
 			if (bInit) {
 				FadeInOut.Instance.Open (0.25f);
 				m_btnReturn.TriggerClear ();
-
+				m_btnHelp.TriggerClear ();
 			}
 			if (ButtonPushed) {
 				Debug.Log (Index);
@@ -150,7 +155,21 @@ public class SelectMain : ButtonManager {
 				SetBanner (m_iPageIndex);
 			} else if (m_btnReturn.ButtonPushed) {
 				m_eStep = STEP.GOTO_TITLE_WAIT;
+			} else if (m_btnHelp.ButtonPushed) {
+				m_eStep = STEP.HELP;
 			} else {
+			}
+			break;
+		case STEP.HELP:
+			if (bInit) {
+				//m_NendAdIcon.Hide ();
+				m_page = PrefabManager.Instance.MakeScript<HelpMain> ("prefab/RootHelp", m_goDispRoot);
+				m_page.PageStart ();
+			}
+			if (m_page.IsEnd ()) {
+				//m_NendAdIcon.Show ();
+				m_eStep = STEP.IDLE;
+				Destroy (m_page.gameObject);
 			}
 			break;
 
@@ -159,7 +178,7 @@ public class SelectMain : ButtonManager {
 				FadeInOut.Instance.Close (0.25f);
 			}
 			if (FadeInOut.Instance.IsIdle ()) {
-				Application.LoadLevelAsync ("game");
+				SceneManager.LoadScene ("game");
 			}
 			break;
 
@@ -174,7 +193,7 @@ public class SelectMain : ButtonManager {
 
 		case STEP.GOTO_TITLE:
 			if (bInit) {
-				Application.LoadLevelAsync ("title");
+				SceneManager.LoadScene ("title");
 			}
 			break;
 
@@ -193,7 +212,7 @@ public class SelectMain : ButtonManager {
 	// バナーがドラッグされて切り替わった際に呼ばれるイベント
 	public void DragBanner(GameObject _goBanner) {
 		//Debug.Log (_goBanner.name);
-		int iBannerNo = 0;
+		//int iBannerNo = 0;
 		SetBanner(_goBanner);
 		return;
 	}
