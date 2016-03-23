@@ -9,11 +9,11 @@ public class LevelIcon : ButtonBase {
 	[SerializeField]
 	private UILabel m_lbText;
 
-	private int m_iLevel;
+	//private int m_iLevel;
 
 	public void Initialize( int _iLevel ){
 
-		m_iLevel = _iLevel;
+		//m_iLevel = _iLevel;
 
 		m_lbText.text = _iLevel.ToString ();
 

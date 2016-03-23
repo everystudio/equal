@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ReturnButton : ButtonBase {
 
@@ -15,7 +16,7 @@ public class ReturnButton : ButtonBase {
 		if (ButtonPushed) {
 			if (m_strNextScene.Equals ("") == false) {
 				TriggerClear ();
-				Application.LoadLevelAsync (m_strNextScene);
+				SceneManager.LoadScene (m_strNextScene);
 			}
 		}
 	}

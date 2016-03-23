@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using NendUnityPlugin.AD;
+using UnityEngine.SceneManagement;
 
 public class GameMain : MonoBehaviourEx {
 
@@ -162,7 +163,6 @@ public class GameMain : MonoBehaviourEx {
 
 				m_btnBack.TriggerClear ();
 			}
-
 			if (m_DotManager.ButtonPushed) {
 				m_eStep = STEP.CLICK_DOT;
 			} else if (m_btnBack.ButtonPushed) {
@@ -172,10 +172,8 @@ public class GameMain : MonoBehaviourEx {
 			break;
 		case STEP.CLICK_DOT:
 			if (bInit) {
-
 				int iClickedDotIndex = m_DotManager.Index;
 				m_DotManager.ChangeDotColor (iClickedDotIndex , 3 , true );
-
 				m_UnderNumberRed.SetNumber (m_DotManager.GetNumber (DefineProject.DOT_COLOR.RED));
 				m_UnderNumberBlue.SetNumber (m_DotManager.GetNumber (DefineProject.DOT_COLOR.BLUE));
 
@@ -233,7 +231,7 @@ public class GameMain : MonoBehaviourEx {
 				FadeInOut.Instance.Close (0.25f);
 			}
 			if (FadeInOut.Instance.IsIdle ()) {
-				Application.LoadLevelAsync ("select");
+				SceneManager.LoadScene ("select");
 			}
 			break;
 		case STEP.MAX:

@@ -23,7 +23,7 @@ public class DataManagerEqual : DataManagerBase<DataManagerEqual> {
 	public override void Initialize ()
 	{
 		base.Initialize ();
-		Debug.LogError ("call");
+		//Debug.LogError ("call");
 		DontDestroyOnLoad (this);			// 削除させない
 		/*
 		m_masterTableAudio.Load ("nouse");
