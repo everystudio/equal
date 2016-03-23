@@ -147,7 +147,7 @@ public class TitleMain : MonoBehaviourEx {
 			if (bInit) {
 				m_TapStart.gameObject.SetActive (false);
 				m_StageSelect.gameObject.SetActive (true);
-				m_ScoreAttack.gameObject.SetActive (true);
+				//m_ScoreAttack.gameObject.SetActive (true);
 
 				m_StageSelect.TriggerClear ();
 				m_ScoreAttack.TriggerClear ();

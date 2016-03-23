@@ -47,7 +47,7 @@ public class TapStart : ButtonBase {
 		case STEP.NORMAL_BLINK:
 			if (bInit) {
 				m_fTimer = 0.0f;
-				m_fInterval = 1.0f;
+				m_fInterval = 0.0f;
 				m_bBlinkFlag = true;
 			}
 
@@ -56,7 +56,6 @@ public class TapStart : ButtonBase {
 				fRate = 3.0f;
 			}
 
-			m_fTimer += Time.deltaTime * fRate;
 			if (m_fInterval < m_fTimer) {
 				m_fTimer -= m_fInterval;
 				m_bBlinkFlag = !m_bBlinkFlag;
@@ -64,9 +63,10 @@ public class TapStart : ButtonBase {
 			}
 
 			if (ButtonPushed) {
+				m_fTimer += Time.deltaTime * fRate;
 				m_fInterval = 0.25f;
 			} else {
-				m_fInterval = 1.0f;
+				//m_fInterval = 1.0f;
 			}
 			break;
 
