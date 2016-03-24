@@ -18,7 +18,15 @@ public class GameMain : MonoBehaviourEx {
 
 	//[SerializeField]
 	//private NendAdInterstitial m_NendAdInterstitial;
-
+	public Telop m_telop;
+	string[] TELOP_MESSAGE_ARR = {
+		"数字をタップすると白→赤→青の順番で入れ替わります",
+		"赤と青の数字の合計値が同じになればクリア",
+		"クリアには赤・青それぞれ３つの数字を選ぶ必要があります",
+		"赤・青の数字が３つある状態ではローテーションがスキップされます",
+		"ルールがわからない場合は？ボタンで確認してください",
+		"組み合わせは一つじゃない！色んな組み合わせを見つけよう",
+	};
 
 	[SerializeField]
 	private UILabel m_lbHeaderLevel;
@@ -168,6 +176,13 @@ public class GameMain : MonoBehaviourEx {
 			} else if (m_btnBack.ButtonPushed) {
 				m_eStep = STEP.BACK_SELECT;
 			} else {
+			}
+			// 最初の方だけ出る
+			if (DataManagerEqual.Instance.m_iPlayLevel < 10) {
+				if (m_telop.IsIdle ()) {
+					int iMessageIndex = UtilRand.GetRand (TELOP_MESSAGE_ARR.Length);
+					m_telop.SetTelop (TELOP_MESSAGE_ARR [iMessageIndex]);
+				}
 			}
 			break;
 		case STEP.CLICK_DOT:
