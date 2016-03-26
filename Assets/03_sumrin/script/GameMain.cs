@@ -16,6 +16,8 @@ public class GameMain : MonoBehaviourEx {
 	private NendAdIcon m_NendAdIcon;
 	#endif
 
+	public GameObject m_goDispRoot;
+
 	//[SerializeField]
 	//private NendAdInterstitial m_NendAdInterstitial;
 	public Telop m_telop;
@@ -42,6 +44,8 @@ public class GameMain : MonoBehaviourEx {
 	[SerializeField]
 	private ButtonBase m_btnBack;
 
+	public ButtonBase m_btnHelp;
+
 	public enum STEP {
 		NONE			= 0,
 		START			,
@@ -50,6 +54,7 @@ public class GameMain : MonoBehaviourEx {
 		SKIT			,
 
 		IDLE			,
+		HELP			,
 
 		CLICK_DOT		,
 		CLEAR_CHECK		,
@@ -68,6 +73,8 @@ public class GameMain : MonoBehaviourEx {
 	public float m_fTimer;
 	public int m_iClearScore;
 	public bool m_bDispFlag;
+
+	public PageBase m_Page;
 
 	void ShowAd(bool _bFlag){
 
@@ -170,11 +177,14 @@ public class GameMain : MonoBehaviourEx {
 				m_DotManager.TriggerClearAll ();
 
 				m_btnBack.TriggerClear ();
+				m_btnHelp.TriggerClear ();
 			}
 			if (m_DotManager.ButtonPushed) {
 				m_eStep = STEP.CLICK_DOT;
 			} else if (m_btnBack.ButtonPushed) {
 				m_eStep = STEP.BACK_SELECT;
+			}else if(m_btnHelp.ButtonPushed){
+				m_eStep = STEP.HELP;
 			} else {
 			}
 			// 最初の方だけ出る
@@ -185,6 +195,24 @@ public class GameMain : MonoBehaviourEx {
 				}
 			}
 			break;
+
+		case STEP.HELP:
+			if (bInit) {
+				#if UNITY_ANDROID
+				m_NendAdIcon.Hide ();
+				#endif
+				m_Page = PrefabManager.Instance.MakeScript<HelpMain> ("prefab/RootHelp", m_goDispRoot);
+				m_Page.PageStart ();
+			}
+			if (m_Page.IsEnd ()) {
+				m_eStep = STEP.IDLE;
+				Destroy (m_Page.gameObject);
+				#if UNITY_ANDROID
+				m_NendAdIcon.Show ();
+				#endif
+			}
+			break;
+
 		case STEP.CLICK_DOT:
 			if (bInit) {
 				int iClickedDotIndex = m_DotManager.Index;

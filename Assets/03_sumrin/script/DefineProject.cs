@@ -19,6 +19,7 @@ public class DefineProject : Define {
 	#elif UNITY_IPHONE
 	public static readonly string NEND_AD_INTER_API_KEY = "321f03d70fb7e3455da1ac687be72d49354b2972";
 	public static readonly string NEND_AD_INTER_SPOT_ID = "447212";
+	public static readonly string INSTALL_URL = "https://itunes.apple.com/us/app/i-kuaru/id1041959470?mt=8";
 	#endif
 
 	public static readonly string KEYNAME_STAGE = "stage";

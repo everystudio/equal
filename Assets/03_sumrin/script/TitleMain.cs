@@ -173,14 +173,18 @@ public class TitleMain : MonoBehaviourEx {
 
 		case STEP.HELP:
 			if (bInit) {
+				#if UNITY_ANDROID
 				m_NendAdIcon.Hide ();
+				#endif
 				m_Page = PrefabManager.Instance.MakeScript<HelpMain> ("prefab/RootHelp", m_goDispRoot);
 				m_Page.PageStart ();
 			}
 			if (m_Page.IsEnd ()) {
 				m_eStep = STEP.MODE_SELECT;
 				Destroy (m_Page.gameObject);
+				#if UNITY_ANDROID
 				m_NendAdIcon.Show ();
+				#endif
 			}
 			break;
 		case STEP.DELAY_STAGE_SELECT:
@@ -218,12 +222,13 @@ public class TitleMain : MonoBehaviourEx {
 				m_ScoreAttack.gameObject.GetComponent<UILabel> ().text = "準備中です";
 				m_ScoreAttack.Show ();
 				m_ScoreAttack.enabled = false;
-
+				#if UNITY_ANDROID
 				if (m_bChange == true) {
 					GoogleIAB.purchaseProduct ("comicticket100");
 				} else {
 					GoogleIAB.purchaseProduct ("equal.month.item001");
 				}
+				#endif
 				m_bChange = !m_bChange;
 			}
 

@@ -59,8 +59,10 @@ public class ClearDialog : MonoBehaviour {
 			string.Format( "Level{0}を{1}い〜くあるでクリア！ {2}" , m_iLevel , m_iScore, DefineProject.TWEET_MESSAGE_CLEAR )
 		);
 		#elif UNITY_IPHONE
+		//DefineProject.TWEET_MESSAGE_CLEAR,
+		string strTest = string.Format( "Level{0}を{1}い〜くあるでクリア！ {2}" , m_iLevel , m_iScore, DefineProject.TWEET_MESSAGE_CLEAR );
 		SocialConnector.Share(
-			DefineProject.TWEET_MESSAGE_CLEAR,
+			strTest,
 			"", 
 			Application.persistentDataPath + "/image.png"
 		);   

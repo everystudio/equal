@@ -34,9 +34,10 @@ public class StoreManager : MonoBehaviour {
 	private void initialize(){
 		DontDestroyOnLoad(gameObject);
 
+		#if UNITY_ANDROID
 		GoogleIAB.enableLogging (true);
 		GoogleIAB.init ("MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArGLKSb92Imt43S40ArCXfTmQ31c+pFQTM0Dza3j/Tn4cqjwccjQ/jej68GgVyGXGC2gT/EtbcVVA+bHugXmyv73lGBgmQlzBL41WYTKolO8Z6pVWTeHBtsT7RcHKukoKiONZ7NiQ9P5t6CCPBB2sXQOp1y3ryVbv01xXlM+hB6HkkKxrT6lIjTbtiVXCHAJvqPexPbqVIfGjBaXH/oHKxEBxYDaa6PTUsU3OP3MTx63ycTEnEMsQlA1W6ZuTFIa5Jd3cVlfQI7uovEzAbIlUfwcnxVOUWASiYe81eQiD1BMl+JeCRhfd5e8D4n0LOA12rHm1F3fC9ZoIEjpNB+BRhwIDAQAB");
-
+		#endif
 
 	}
 
@@ -44,7 +45,9 @@ public class StoreManager : MonoBehaviour {
 		Debug.Log ("Dummy!");
 	}
 	public void buy(string _strCode ){
+		#if UNITY_ANDROID
 		GoogleIAB.purchaseProduct (_strCode);
+		#endif
 	}
 	/*
 	public static Action<string,int> purchaseFailedEvent(string json){
