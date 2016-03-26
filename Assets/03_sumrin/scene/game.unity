@@ -2114,6 +2114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DotManager: {fileID: 1717577052}
   m_NendAdBanner: {fileID: 215365391}
+  m_NendAdIcon: {fileID: 2117060146}
   m_goDispRoot: {fileID: 1560880717}
   m_telop: {fileID: 1053121941}
   m_lbHeaderLevel: {fileID: 1800752509}
@@ -3311,6 +3312,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9097ca3ae34f740b7ad7a613a0c8693e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  account:
+    apiKey: a79db155ed934f077519a30b5b9663a2b8f73fba
+    spotID: 443849
+  automaticDisplay: 0
+  orientation: 0
+  gravity: 0200000004000000
+  margin:
+    left: 0
+    top: 0
+    right: 0
+    bottom: 0
+  icon:
+  - tag: 0
+    size: 75
+    spaceEnabled: 1
+    titleVisible: 0
+    titleColor: '#000000'
+    gravity: 
+    margin:
+      left: 0
+      top: 0
+      right: 0
+      bottom: 0
 --- !u!4 &2117060147
 Transform:
   m_ObjectHideFlags: 0
