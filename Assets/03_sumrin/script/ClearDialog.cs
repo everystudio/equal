@@ -8,13 +8,16 @@ public class ClearDialog : MonoBehaviour {
 
 	[SerializeField]
 	private ButtonBase m_btnShare;
-
+	#if !UNITY_WEBPLAYER
 	private int m_iLevel;
 	private int m_iScore;
+	#endif
 
 	public void Initialize( int _iLevel , int _iScore ){
+		#if !UNITY_WEBPLAYER
 		m_iLevel = _iLevel;
 		m_iScore = _iScore;
+		#endif
 
 		m_btnNext.TriggerClear ();
 		m_btnShare.TriggerClear ();
