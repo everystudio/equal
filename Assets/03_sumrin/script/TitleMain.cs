@@ -24,6 +24,9 @@ public class TitleMain : MonoBehaviourEx {
 	public GameObject m_goDispRoot;
 	private PageBase m_Page;
 
+	[SerializeField]
+	private UnityMidi.MidiPlayer midiPlayer;
+
 	private float m_fTimer;
 
 	public enum STEP {
@@ -72,12 +75,21 @@ public class TitleMain : MonoBehaviourEx {
 		ShowAd (false);
 	}
 
+	public bool bMidiTest = false;
+	bool bMidiTestPre = false;
+
 	// Use this for initialization
 	void Start () {
 		m_eStep = STEP.IDLE;
 		m_eStepPre = STEP.MAX;
 		FadeInOut.Instance.Close (0.0f);
 		FadeInOut.Instance.Open (0.5f);
+
+		bMidiTest = false;
+		bMidiTestPre = true;
+
+		midiPlayer.SetLoop (true);
+		midiPlayer.Play ("ExampleMidis" ,"maoudamashii_2_boss01.mid" , "CSharpSynth","GMBank.bank");
 	
 		m_StageSelect.gameObject.SetActive (false);
 		m_btnHelp.gameObject.SetActive (false);
@@ -118,6 +130,16 @@ public class TitleMain : MonoBehaviourEx {
 			bInit = true;
 		}
 
+
+		if (bMidiTestPre != bMidiTest) {
+			bMidiTestPre  = bMidiTest;
+			if (bMidiTest) {
+				midiPlayer.Play ();
+			} else {
+				midiPlayer.Pause ();
+			}
+
+		}
 		switch (m_eStep) {
 
 		case STEP.REVIEW:

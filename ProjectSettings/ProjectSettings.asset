@@ -39,7 +39,7 @@ PlayerSettings:
   disableDepthAndStencilBuffers: 0
   defaultIsFullScreen: 1
   defaultIsNativeResolution: 1
-  runInBackground: 0
+  runInBackground: 1
   captureSingleScreen: 0
   Override IPod Music: 0
   Prepare IOS For Recording: 0
@@ -522,5 +522,5 @@ PlayerSettings:
   additionalIl2CppArgs::additionalIl2CppArgs: 
   cloudProjectId: d5370527-3a9d-4071-b173-747b6c15d3c8
   projectName: "\u3044\u301C\u304F\u3042\u308B"
-  organizationId: b6c9d8fa-610c-47c7-8a17-7d6c7bd434dd
+  organizationId: please_delete
   cloudEnabled: 0
